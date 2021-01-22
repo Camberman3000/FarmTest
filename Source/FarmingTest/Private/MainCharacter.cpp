@@ -10,6 +10,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "AC_PlayerInteractSystem.h"
+#include "PlantItem.h"
 
 // Sets default values
 AMainCharacter::AMainCharacter()
@@ -66,28 +67,31 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAction("EKey", IE_Pressed, this, &AMainCharacter::EKeyPressed);
 }
 
-void AMainCharacter::EKeyPressed()
-{
-	 
-	//UE_LOG(LogTemp, Warning, TEXT("Pressed E Key"));
-	/*FHitResult hitResult;
-	bool bDidHit;
-	CheckForHarvestNode(hitResult, bDidHit);*/
-}
  
-void AMainCharacter::CheckForHarvestNode(FHitResult& hitresult, bool& bDidHit)
-{
-	UE_LOG(LogTemp, Warning, TEXT("Check for Harvest node"))
-		FVector playerForwardVector = FollowCamera->GetForwardVector();
-	FVector worldLocation = FollowCamera->GetComponentLocation();
-	//....
-	//TArray<TEnumAsByte<EObjectTypeQuery>> TraceObjects;
-	//TraceObjects.Add(UEngineTypes::ConvertToObjectType(ECC_WorldDynamic));//add your object types here.
-	//if (UKismetSystemLibrary::LineTraceSingleForObjects(this, TraceStart, TraceEnd, TraceObjects, false, TArray<AActor*>(), EDrawDebugTrace::ForDuration, FirstHit, true))
-	//{
-	//}	 
-}
+void AMainCharacter::EKeyPressed()
+{	 
+	//UE_LOG(LogTemp, Warning, TEXT("Pressed E Key"));
+	// This is where the player plows the plot and plants the seed
+	
+	InteractionComp = FindComponentByClass<UAC_PlayerInteractSystem>();
 
+	if (InteractionComp->bPlantIsOverlapped == true)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Plant is overlapped. Open menu..."));
+
+		// TODO: REMOVE LINES BELOW FOR PROD: Temp items for proof of concept. These will be set from the player menu (UI) when attempting to plant
+		 InteractionComp->OverlappedPlantActor->bHasSeed = true;
+		 InteractionComp->OverlappedPlantActor->plotStatus = EPlotStatus::Planted;
+		 InteractionComp->OverlappedPlantActor->growthStatus = EGrowthStatus::Seedling;
+		 InteractionComp->OverlappedPlantActor->InteractWithPlant();
+		 // END REMOVE FOR PROD
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Plant is NOT overlapped. Do nothing or other world activity"));
+	}	 
+}
+  
 void AMainCharacter::MoveForward(float Value)
 {
 	if ((Controller != NULL) && (Value != 0.0f))

@@ -18,9 +18,22 @@ class FARMINGTEST_API UAC_PlayerInteractSystem : public UAC_BaseInteraction
 public:
 	UAC_PlayerInteractSystem();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats", meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interaction")
+	bool bPlantIsOverlapped;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interaction")
+	class APlantItem* OverlappedPlantActor;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
 	float playerHealth;
 	 	 
 	void DisplayCropTypeUponPickup(TEnumAsByte<ECropType> pickup);
+
+	 
+	void SetPlantOverlapStatus(class APlantItem* plantActor, bool overlapStatus);
+
+ 
+
+	
 };
 

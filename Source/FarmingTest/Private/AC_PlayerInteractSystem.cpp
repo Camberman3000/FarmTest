@@ -2,13 +2,14 @@
 
 
 #include "AC_PlayerInteractSystem.h"
-//#include "CropPickupItem.h"
+#include "PlantItem.h"
 
 ECropType cropType;
 
 UAC_PlayerInteractSystem::UAC_PlayerInteractSystem()
 {
 	 playerHealth = 100.f;
+	 bPlantIsOverlapped = false;
 }
  
 void UAC_PlayerInteractSystem::DisplayCropTypeUponPickup(TEnumAsByte<ECropType> pickup)
@@ -19,3 +20,15 @@ void UAC_PlayerInteractSystem::DisplayCropTypeUponPickup(TEnumAsByte<ECropType> 
 	itemstr = UEnum::GetDisplayValueAsText(pickup).ToString();
 	UE_LOG(LogTemp, Warning, TEXT("AC_PlayerInteractionSystemItem - Crop type picked up: %s"), *itemstr);
 }
+
+void UAC_PlayerInteractSystem::SetPlantOverlapStatus(APlantItem* plantActor, bool overlapStatus)
+{
+	 if (plantActor)
+	 {
+		 OverlappedPlantActor = plantActor;
+		 bPlantIsOverlapped = overlapStatus;
+		 //UE_LOG(LogTemp, Warning, TEXT("OVERLAPPED"));
+	 }	
+}
+
+ 

@@ -28,6 +28,11 @@ public:
 	// Sets default values for this character's properties
 	AMainCharacter();
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interact")
+	class UAC_PlayerInteractSystem* InteractionComp;
+
+	 
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -45,10 +50,10 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-public:
-	UFUNCTION()
-	void CheckForHarvestNode(FHitResult& hitresult, bool& bDidHit);
+	 
 
+public:
+	 
 	UFUNCTION()
 		void EKeyPressed();
 
@@ -56,5 +61,5 @@ public:
 
 public:
 
-	class UAC_PlayerInteractSystem* InteractionComp;
+	
 };

@@ -17,21 +17,6 @@ enum ECropType
 	Corn UMETA(DisplayName = "Corn")
 };
 
-enum EGrowthStatus
-{
-	Seedling UMETA(DisplayName = "Seedling"),
-	Sprout UMETA(DisplayName = "Sprout"),
-	Ripening UMETA(DisplayName = "Ripening"),
-	Ripe UMETA(DisplayName = "Ripe")	
-};
-
-enum EPlotStatus
-{
-	Unused UMETA(DisplayName = "Unused"),
-	Plowed UMETA(DisplayName = "Plowed"),
-	Planted UMETA(DisplayName = "Planted")	 
-};
-
 /**
  * 
  */
@@ -47,9 +32,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CropType")
 		TEnumAsByte<ECropType> CropType;
 
-		//Define enums - TODO: Will add croptype here. Using it as a blueprint property for testing
-		EGrowthStatus growthStatus;
-		EPlotStatus plotStatus;
+		////Define enums - TODO: Will add croptype here. Using it as a blueprint property for testing
+		//EGrowthStatus growthStatus;
+		//EPlotStatus plotStatus;
  
 	virtual void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) override;
 
