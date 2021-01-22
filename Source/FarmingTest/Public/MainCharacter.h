@@ -31,6 +31,18 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interact")
 	class UAC_PlayerInteractSystem* InteractionComp;
 
+protected:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interact")
+	float traceDistance;
+
+	// Line trace forward from player for interaction	 
+	void TraceForward();
+	 
+
+	// Get z location of ground at x,y
+	UFUNCTION(BlueprintPure, meta = (AdvancedDisplay = "bDrawDebugLines"))
+		float GetSurface(FVector2D Point, bool bDrawDebugLines = false);
+	float GroundLoc;
 	 
 
 protected:
