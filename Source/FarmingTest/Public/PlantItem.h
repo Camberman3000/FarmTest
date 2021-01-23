@@ -15,8 +15,7 @@ class FARMINGTEST_API APlantItem : public APlantBaseItem
 {
 	GENERATED_BODY()
 
-public:
-	
+public:	
 		APlantItem();
 
 		// Define enums

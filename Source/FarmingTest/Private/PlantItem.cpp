@@ -68,6 +68,9 @@ void APlantItem::InteractWithPlant()
 		//{
 		//	//PlayPlowAnimation();
 		//	plotStatus = EPlotStatus::Planted;
+		//  growthStatus = EGrowthStatus::Seedling;
+		//  FTimerHandle TempHandle;
+		//  GetWorld()->GetTimerManager().SetTimer(TempHandle, this, &ACursedHarvestGameMode::PerformSeedlingStuff, SeedlingTimerLength, false);
 		//}		 
 	}
 		break;	 
@@ -80,6 +83,8 @@ void APlantItem::InteractWithPlant()
 			// Changes the mesh to reflect the current growth state TODO: Get meshes to use
 			UStaticMesh* meshToUse = Cast<UStaticMesh>(StaticLoadObject(UStaticMesh::StaticClass(), NULL, TEXT("/Game/StarterContent/Props/SM_Bush")));
 			myMesh->SetStaticMesh(meshToUse);
+			// TODO: This is just to show a growth scale until actual meshes are available
+			myMesh->SetWorldScale3D(FVector(0.2f, 0.2f, 0.2f));
 			UE_LOG(LogTemp, Warning, TEXT("Seedling planted"));
 		}
 		break;

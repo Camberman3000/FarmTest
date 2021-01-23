@@ -110,7 +110,11 @@ void AMainCharacter::TraceForward()
 
 	FCollisionQueryParams TraceParams;
 	bool bHit = GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, TraceParams);
-	DrawDebugLine(GetWorld(), Start, End, FColor::Red, false, 3.0f);		
+
+	if (bDrawPlantingDebugLine)
+	{
+		DrawDebugLine(GetWorld(), Start, End, FColor::Red, false, 3.0f);
+	}			
 
 	if (bHit)
 	{
@@ -125,6 +129,12 @@ void AMainCharacter::TraceForward()
 		if (GroundLoc + 10.f > Hit.ImpactPoint.Z && GroundLoc - 10.f < Hit.ImpactPoint.Z)
 		{
 			UE_LOG(LogTemp, Warning, TEXT("Within tolerance, can plant here."));
+			// Spawn plant actor
+			FActorSpawnParameters SpawnInfo;
+			APlantItem* Plant = GetWorld()->SpawnActor<APlantItem>(Hit.ImpactPoint, Rot, SpawnInfo);
+			Plant->growthStatus = EGrowthStatus::Seedling;
+			Plant->plotStatus = EPlotStatus::Planted;
+			Plant->InteractWithPlant();
 		}
 		else
 		{

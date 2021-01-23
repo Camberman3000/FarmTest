@@ -18,7 +18,6 @@ APlantBaseItem::APlantBaseItem()
 	myMesh->SetupAttachment(GetRootComponent());
 
 	collisionVolume->SetSphereRadius(90.f);
-
 }
 
 // Called when the game starts or when spawned
@@ -34,7 +33,6 @@ void APlantBaseItem::BeginPlay()
 void APlantBaseItem::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 // Call from inherited class by use of "Super::OnOverlapBegin(...)" (override)

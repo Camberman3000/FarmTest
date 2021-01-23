@@ -37,6 +37,9 @@ protected:
 
 	// Line trace forward from player for interaction	 
 	void TraceForward();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interact")
+	bool bDrawPlantingDebugLine;
 	 
 
 	// Get z location of ground at x,y
